@@ -47,10 +47,10 @@ export class SystemEntity {
     link:string;
     @Column({
         name:'active',
-        type:'boolean',
+        type:'integer',
         nullable:false,
     })
-    active:boolean;
+    active:number;
 
 0
     @ManyToMany(()=>UserEntity,(userss)=>userss.systems)

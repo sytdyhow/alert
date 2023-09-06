@@ -40,11 +40,11 @@ export class CreateSystemDto {
     image:Express.Multer.File;
 
     @ApiProperty({
-        type:Boolean,
+        type:Number,
         nullable:false,
         required:true,
     })
-    active:boolean;
+    active:number;
     
 
 

@@ -7,6 +7,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ImageCommon } from 'src/common/images/images.common';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { Role } from 'src/modules/users/permissions/decorator/role.decorator';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guards';
+import { PermissionGuard } from 'src/modules/users/permissions/guards/permission.guard';
 
 @Controller('systems')
 @ApiTags('Systems Controller')
@@ -32,16 +35,22 @@ export class SystemsController {
   }
 
   @Get()
+  // @ApiBearerAuth()
   // @Permissions('systems.read')
+  //  @Role('users.read')
+  // @UseGuards(JwtAuthGuard, PermissionGuard)
   async findAll() {
-    const systems = await this.systemsService.findAll();
-    const response = systems.filter((system) => {
-      if(system.active == true) return system;
+    var response = [];
+    var systems = await this.systemsService.findAll();
+    systems = systems.filter((system) => {
+      if(system.active == 1) return system;
     })
-    return response;
+
+    return systems;
   }
 
   @Get(':id')
+  // @ApiBearerAuth()
   // @Permissions('systems.read')
   findOne(@Param('id') id: string) {
     return this.systemsService.findOne(+id);

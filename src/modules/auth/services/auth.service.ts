@@ -5,7 +5,6 @@ import { UserEntity } from 'src/modules/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt'
 import { ConfigService } from '@nestjs/config';
-import { access } from 'fs';
 @Injectable()
 export class AuthService {
   constructor(
@@ -13,8 +12,6 @@ export class AuthService {
     private configService:ConfigService,             
     @InjectRepository(UserEntity) private userRepo:Repository<UserEntity>
     ){}
-  
-
     async login(username:string,password:string){
  
       const user =await this.userRepo.findOneBy({
@@ -41,11 +38,30 @@ export class AuthService {
       expiresIn:'1h'
     }
       );
+
+    const systems = await this.findOne(user.id);
+
+
       return{
         access:true,
         accessToken,
+        systems
+
+
+
+
+
+        
       }
 
+    }
+
+    findOne(id:number){
+      return this.userRepo
+      .createQueryBuilder('users_systems')
+      .leftJoinAndSelect('users_systems.systems','systems')
+      .where('users_systems.id =:id',{id})
+      .getOne();
     }
 
   

@@ -11,7 +11,7 @@ import { RolePermissionsSeed } from "../seeds/permissions/permissions-role.seed"
 
 dotenv.config();
 const dataSourceOption:DataSourceOptions & SeederOptions ={
-    type: 'postgres',
+    type: 'mysql',
     database:process.env.POSTGRES_DATABASE_NAME,
     host:process.env.POSTGRES_DATABASE_HOST,
     port:parseInt(process.env.POSTGRES_DATABASE_PORT),

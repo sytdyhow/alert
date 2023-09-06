@@ -13,7 +13,7 @@ import { SystemEntity } from '../systems/entities/system.entity';
             imports:[ConfigModule],
             useFactory:async(configService:ConfigService)=>{
                 return{
-                type:'postgres',
+                type:'mysql',
                 host:configService.get('POSTGRES_DATABASE_HOST'),
                 port:configService.get<number>('POSTGRES_DATABASE_PORT'),
                 username:configService.get('POSTGRES_DATABASE_USERNAME'),
@@ -22,7 +22,7 @@ import { SystemEntity } from '../systems/entities/system.entity';
                 entities:[UserEntity,RoleEntity,PermissionEntity,ImageEntity,SystemEntity],
                 // logging: true,
                 // logger: 'simple-console',
-                synchronize: false,
+                synchronize: true,
                 };
             },
             inject:[ConfigService],
