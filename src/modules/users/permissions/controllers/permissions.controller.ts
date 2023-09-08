@@ -13,41 +13,41 @@ export class PermissionsController {
   constructor(private readonly permissionsService: PermissionsService) {}
 
   @Post()
-  // @ApiBearerAuth()
-  // @Role('')
-  // @UseGuards(JwtAuthGuard,PermissionGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   create(@Body() createPermissionDto: CreatePermissionDto) {
     return this.permissionsService.create(createPermissionDto);
   }
 
   @Get()
-  // @ApiBearerAuth()
-  // @Role('user.read','user.write')
-  // @UseGuards(JwtAuthGuard,PermissionGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   findAll() {
     return this.permissionsService.findAll();
   }
 
   @Get(':id')
-  // @ApiBearerAuth()
-  // @Role('')
-  // @UseGuards(JwtAuthGuard,PermissionGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   findOne(@Param('id') id: string) {
     return this.permissionsService.findOne(+id);
   }
 
   @Patch(':id')
-  // @ApiBearerAuth()
-  // @Role('')
-  // @UseGuards(JwtAuthGuard,PermissionGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   update(@Param('id') id: string, @Body() updatePermissionDto: UpdatePermissionDto) {
     return this.permissionsService.update(+id, updatePermissionDto);
   }
 
   @Delete(':id')
-  // @ApiBearerAuth()
-  // @Role('')
-  // @UseGuards(JwtAuthGuard,PermissionGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   remove(@Param('id') id: string) {
     return this.permissionsService.remove(+id);
   }

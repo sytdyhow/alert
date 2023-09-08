@@ -15,9 +15,10 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
    const salt =await bcrypt.genSalt(12); 
    const password =await bcrypt.hash(createUserDto.password,salt);
+   var lower = createUserDto.username.toLowerCase()
    const {active} =createUserDto;
     return this.userRepo.save({
-      username:createUserDto.username,
+      username:lower,
        password:password,
        active:createUserDto.active,
       roles:createUserDto.roleIds.map(

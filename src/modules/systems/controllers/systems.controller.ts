@@ -17,6 +17,8 @@ export class SystemsController {
   constructor(private readonly systemsService: SystemsService) {}
 
   @Post()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   // @Permissions('systems.create')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
@@ -35,10 +37,10 @@ export class SystemsController {
   }
 
   @Get()
-  // @ApiBearerAuth()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  
   // @Permissions('systems.read')
-  //  @Role('users.read')
-  // @UseGuards(JwtAuthGuard, PermissionGuard)
   async findAll() {
     var response = [];
     var systems = await this.systemsService.findAll();
@@ -50,19 +52,27 @@ export class SystemsController {
   }
 
   @Get(':id')
-  // @ApiBearerAuth()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   // @Permissions('systems.read')
   findOne(@Param('id') id: string) {
     return this.systemsService.findOne(+id);
   }
 
   @Patch(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   // @Permissions('systems.update')
   update(@Param('id') id: string, @Body() updateSystemDto: UpdateSystemDto) {
     return this.systemsService.update(+id, updateSystemDto);
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   // @Permissions('systems.delete')
   remove(@Param('id') id: string) {
     return this.systemsService.remove(+id);

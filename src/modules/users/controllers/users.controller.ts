@@ -4,6 +4,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guards';
 @Controller({
   path:'users'
 })
@@ -15,14 +16,18 @@ export class UsersController {
 
   @Post()
   @ApiConsumes('application/json')
-  //   @ApiBearerAuth()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   // @Permissions('users.create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get()
-    // @ApiBearerAuth()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
     // @Permissions('users.read')
   async findAll() {
     const users=await this.usersService.findAll();
@@ -35,21 +40,26 @@ export class UsersController {
   }
 
   @Get(':id')
-  //   @ApiBearerAuth()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   // @Permissions('users.read')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
-  //   @ApiBearerAuth()
+  @Patch(':id')  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  
   // @Permissions('users.update')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
   @Delete(':id')
-  //   @ApiBearerAuth()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+
   // @Permissions('users.delete')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

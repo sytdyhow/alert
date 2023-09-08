@@ -34,7 +34,7 @@ export class CreateSystemDto {
     @ApiProperty({
         type:String,
         format:'binary',
-        required:true,
+        required:false,
         nullable:false
     })
     image:Express.Multer.File;

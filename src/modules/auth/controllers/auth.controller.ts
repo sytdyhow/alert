@@ -10,7 +10,7 @@ export class AuthController {
   @Post('login')
   @ApiTags('Auth Login')
   login(@Body() body:LoginDto ){
-    return this.authService.login(body.username,body.password)
+    return this.authService.login(body.username.toLowerCase(),body.password)
   }
 
   

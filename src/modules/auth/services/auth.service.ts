@@ -13,7 +13,6 @@ export class AuthService {
     @InjectRepository(UserEntity) private userRepo:Repository<UserEntity>
     ){}
     async login(username:string,password:string){
- 
       const user =await this.userRepo.findOneBy({
         username,
       });
@@ -46,12 +45,6 @@ export class AuthService {
         access:true,
         accessToken,
         systems
-
-
-
-
-
-        
       }
 
     }

@@ -17,7 +17,8 @@ export class ImagesController {
 
   @Post()
   @ApiBearerAuth()
-  // @Role('')
+  @UseGuards(JwtAuthGuard)
+
   // @UseGuards(JwtAuthGuard,PermissionGuard)
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
@@ -37,15 +38,17 @@ export class ImagesController {
 
   @Get()
   @ApiBearerAuth()
-  // @Role('')
-  // @UseGuards(JwtAuthGuard,PermissionGuard)
+  @UseGuards(JwtAuthGuard)
+
+ // @UseGuards(JwtAuthGuard,PermissionGuard)
   findAll() {
     return this.imagesService.findAll();
   }
 
   @Get(':id')
   @ApiBearerAuth()
-  // @Role('')
+  @UseGuards(JwtAuthGuard)
+
   // @UseGuards(JwtAuthGuard,PermissionGuard)
   findOne(@Param('id') id: string) {
     return this.imagesService.findOne(+id);
@@ -53,7 +56,8 @@ export class ImagesController {
 
   @Patch(':id')
   @ApiBearerAuth()
-  // @Role('')
+  @UseGuards(JwtAuthGuard)
+
   // @UseGuards(JwtAuthGuard,PermissionGuard)
   update(@Param('id') id: string, @Body() updateImageDto: UpdateImageDto) {
     return this.imagesService.update(+id, updateImageDto);
@@ -61,7 +65,8 @@ export class ImagesController {
 
   @Delete(':id')
   @ApiBearerAuth()
-  // @Role('')
+  @UseGuards(JwtAuthGuard)
+  
   // @UseGuards(JwtAuthGuard,PermissionGuard)
   remove(@Param('id') id: string) {
     return this.imagesService.remove(+id);
