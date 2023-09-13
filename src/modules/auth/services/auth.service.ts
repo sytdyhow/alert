@@ -28,34 +28,33 @@ export class AuthService {
           access: false,
         }
       }
-      const accessToken =await this.jwtService.signAsync(
-    {
+      const accessToken = await this.jwtService.signAsync({
         id:user.id
-    },
-    {
-      secret:this.configService.get('JWT_SECRET'),
-      expiresIn:'1h'
-    }
+      },
+        {
+          secret:this.configService.get('JWT_SECRET'),
+          expiresIn:'1h'
+        }
       );
-
-    const systems = await this.findOne(user.id);
+    // const systems = await this.findOne1(user.id);
 
 
       return{
         access:true,
         accessToken,
-        systems
+        
       }
 
     }
 
-    findOne(id:number){
+    findOne1(id:number){
       return this.userRepo
       .createQueryBuilder('users_systems')
       .leftJoinAndSelect('users_systems.systems','systems')
       .where('users_systems.id =:id',{id})
       .getOne();
     }
+   
 
   
 }

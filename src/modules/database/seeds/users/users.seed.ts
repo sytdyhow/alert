@@ -6,6 +6,7 @@ import * as bcrypt from "bcrypt"
 const superUser={
     username:'Yenish',
     password:'gmail',
+    active:true
     
     
 

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Transform } from "class-transformer";
+import { Exclude, Transform } from "class-transformer";
 import { IS_LOWERCASE, IsNotEmpty, IsString, Matches, MinLength, isLowercase } from "class-validator";
 
 export class CreateUserDto {

@@ -1,3 +1,4 @@
+import { Exclude, Expose, Transform } from "class-transformer";
 import { UserEntity } from "src/modules/users/entities/user.entity";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -51,6 +52,10 @@ export class SystemEntity {
         nullable:false,
     })
     active:number;
+
+
+    
+    
 
 0
     @ManyToMany(()=>UserEntity,(userss)=>userss.systems)

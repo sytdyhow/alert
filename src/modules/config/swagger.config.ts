@@ -3,7 +3,7 @@ import { DocumentBuilder } from '@nestjs/swagger';
 export class SwaggerConfig {
   static config() {
     return new DocumentBuilder()
-      .setTitle('Pro1')
+      .setTitle('Prog')
       .setDescription('')
       .setVersion('1.0')
       .addTag('Mb')

@@ -22,7 +22,7 @@ import { SystemEntity } from '../systems/entities/system.entity';
                 entities:[UserEntity,RoleEntity,PermissionEntity,ImageEntity,SystemEntity],
                 // logging: true,
                 // logger: 'simple-console',
-                synchronize: true,
+                synchronize: false,
                 };
             },
             inject:[ConfigService],

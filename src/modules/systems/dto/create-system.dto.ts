@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Exclude } from "class-transformer";
 import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateSystemDto {
@@ -20,6 +21,7 @@ export class CreateSystemDto {
     })
     @IsString()
     @IsNotEmpty()
+    @Exclude()
     description:string;
 
     @ApiProperty({

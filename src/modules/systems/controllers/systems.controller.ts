@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post,Headers, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile, ClassSerializerInterceptor, Req } from '@nestjs/common';
 import { SystemsService } from '../services/systems.service';
 import { CreateSystemDto } from '../dto/create-system.dto';
 import { UpdateSystemDto } from '../dto/update-system.dto';
@@ -10,6 +10,12 @@ import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { Role } from 'src/modules/users/permissions/decorator/role.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guards';
 import { PermissionGuard } from 'src/modules/users/permissions/guards/permission.guard';
+import { UserEntity } from 'src/modules/users/entities/user.entity';
+import { response } from 'express';
+
+interface JwtPayload {
+  id: string;
+}
 
 @Controller('systems')
 @ApiTags('Systems Controller')
@@ -35,7 +41,6 @@ export class SystemsController {
   @UploadedFile() file:Express.Multer.File) {
     return this.systemsService.create(createSystemDto,file);
   }
-
   @Get()
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
@@ -50,6 +55,26 @@ export class SystemsController {
 
     return systems;
   }
+  
+  // @Get('users-system')
+  // find5() {
+  //   // console.log(request.user.id)
+  //   return this.systemsService.finduser();
+  // }
+
+
+  
+  @Get('user-system')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  async findOne1(@Req() request) {
+    const id =request.user.id
+    console.log(id);
+    
+    return this.systemsService.finduser(+id);
+
+  }
+
 
   @Get(':id')
   @ApiBearerAuth()
@@ -77,4 +102,7 @@ export class SystemsController {
   remove(@Param('id') id: string) {
     return this.systemsService.remove(+id);
   }
+
+
+
 }

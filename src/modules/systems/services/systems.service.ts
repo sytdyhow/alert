@@ -1,13 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Req } from '@nestjs/common';
 import { CreateSystemDto } from '../dto/create-system.dto';
 import { UpdateSystemDto } from '../dto/update-system.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SystemEntity } from '../entities/system.entity';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { UserEntity } from 'src/modules/users/entities/user.entity';
+import { sys } from 'typescript';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 
 @Injectable()
 export class SystemsService {
-  constructor(@InjectRepository(SystemEntity) private systemRepo:Repository<SystemEntity>){}
+  constructor(
+    private jwtService:JwtService, 
+    // @InjectRepository(UserEntity) private userRepo:Repository<UserEntity>,
+    @InjectRepository(SystemEntity) private systemRepo:Repository<SystemEntity>){}
+
   create(createSystemDto: CreateSystemDto,file:Express.Multer.File) {
     const {name,description,url,active}=createSystemDto;
     const system=new SystemEntity();
@@ -21,7 +30,7 @@ export class SystemsService {
 
   findAll() {
     return this.systemRepo.find();
-    }
+  }
 
   findOne(id: number) {
     return this.systemRepo.findOneBy({
@@ -57,4 +66,23 @@ return this.systemRepo.save(system);
   }
 
 
+
+
+  /////////////////////////// 
+    finduser(id:number){
+      return this.systemRepo
+      .createQueryBuilder('systems')
+      .innerJoin('users_systems','us','systems.id=us.system_id')
+      .where('us.user_id =:id',{id})
+      .getMany();
+    }
+
+
+
+
+    // return this.systemRepository
+    // .createQueryBuilder('s')
+    // .innerJoin('users_system', 'us', 's.id = us.system_id')
+    // .where('us.user_id = :userId', { userId })
+    // .getMany();
 }
