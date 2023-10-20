@@ -47,7 +47,7 @@ export class CreateSystemTable1692768111605 implements MigrationInterface {
                     },
                     {
                         name:'active',
-                        type:'integer',
+                        type:'boolean',
                         isNullable:false
                     }
                 ]

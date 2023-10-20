@@ -45,31 +45,21 @@ export class SystemsController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   
-  // @Permissions('systems.read')
   async findAll() {
     var response = [];
     var systems = await this.systemsService.findAll();
     systems = systems.filter((system) => {
-      if(system.active == 1) return system;
+      if(system.active == true) return system;
     })
 
     return systems;
   }
-  
-  // @Get('users-system')
-  // find5() {
-  //   // console.log(request.user.id)
-  //   return this.systemsService.finduser();
-  // }
-
-
   
   @Get('user-system')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   async findOne1(@Req() request) {
     const id =request.user.id
-    console.log(id);
     
     return this.systemsService.finduser(+id);
 
@@ -80,6 +70,7 @@ export class SystemsController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
 
+  
   // @Permissions('systems.read')
   findOne(@Param('id') id: string) {
     return this.systemsService.findOne(+id);

@@ -14,7 +14,6 @@ import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 export class SystemsService {
   constructor(
     private jwtService:JwtService, 
-    // @InjectRepository(UserEntity) private userRepo:Repository<UserEntity>,
     @InjectRepository(SystemEntity) private systemRepo:Repository<SystemEntity>){}
 
   create(createSystemDto: CreateSystemDto,file:Express.Multer.File) {
@@ -79,10 +78,4 @@ return this.systemRepo.save(system);
 
 
 
-
-    // return this.systemRepository
-    // .createQueryBuilder('s')
-    // .innerJoin('users_system', 'us', 's.id = us.system_id')
-    // .where('us.user_id = :userId', { userId })
-    // .getMany();
-}
+  }

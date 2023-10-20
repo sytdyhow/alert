@@ -13,32 +13,20 @@ import { SystemEntity } from '../systems/entities/system.entity';
             imports:[ConfigModule],
             useFactory:async(configService:ConfigService)=>{
                 return{
-                type:'mysql',
+                type:'postgres',
                 host:configService.get('POSTGRES_DATABASE_HOST'),
                 port:configService.get<number>('POSTGRES_DATABASE_PORT'),
                 username:configService.get('POSTGRES_DATABASE_USERNAME'),
                 password:configService.get('POSTGRES_DATABASE_PASSWORD'),
                 database:configService.get('POSTGRES_DATABASE_NAME'),
                 entities:[UserEntity,RoleEntity,PermissionEntity,ImageEntity,SystemEntity],
-                // logging: true,
-                // logger: 'simple-console',
+                
                 synchronize: false,
                 };
             },
             inject:[ConfigService],
         })
     ]
-    // imports:[
-    //     TypeOrmModule.forRoot({
-    //         type:"postgres",
-    //         host:"localhost",
-    //         port:5432,
-    //         username:"postgres",
-    //         password:'8523',
-    //         database:'new',
-    //         entities:[UserEntity],
-    //         synchronize:true
-    //     })
-    // ]
+    
 })
 export class DatabaseModule {}

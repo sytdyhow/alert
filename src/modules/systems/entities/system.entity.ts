@@ -48,10 +48,10 @@ export class SystemEntity {
     link:string;
     @Column({
         name:'active',
-        type:'integer',
+        type:'boolean',
         nullable:false,
     })
-    active:number;
+    active:boolean;
 
 
     

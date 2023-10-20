@@ -21,7 +21,6 @@ export class CreateSystemDto {
     })
     @IsString()
     @IsNotEmpty()
-    @Exclude()
     description:string;
 
     @ApiProperty({
@@ -42,11 +41,11 @@ export class CreateSystemDto {
     image:Express.Multer.File;
 
     @ApiProperty({
-        type:Number,
+        type:Boolean,
         nullable:false,
         required:true,
     })
-    active:number;
+    active:boolean;
     
 
 

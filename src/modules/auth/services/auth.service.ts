@@ -47,13 +47,7 @@ export class AuthService {
 
     }
 
-    findOne1(id:number){
-      return this.userRepo
-      .createQueryBuilder('users_systems')
-      .leftJoinAndSelect('users_systems.systems','systems')
-      .where('users_systems.id =:id',{id})
-      .getOne();
-    }
+    
    
 
   

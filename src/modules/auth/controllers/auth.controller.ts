@@ -14,25 +14,8 @@ export class AuthController {
     return this.authService.login(body.username.toLowerCase(),body.password)
   }
 
-  // @Get(':id')
-  // @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
 
-  // findOne(@Param('id') id: string) {
-  //   return this.authService.findOne1(+id);
-  // }
-
-
-  @Get()
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
-  async findOne1(@Req() request) {
-    const id =request.user.id
-    console.log(id);
-    
-    return this.authService.findOne1(+id);
-
-  }
+  
 
  
 }

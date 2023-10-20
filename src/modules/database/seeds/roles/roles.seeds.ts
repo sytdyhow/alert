@@ -7,6 +7,7 @@ const roleSeed= [
     },
     {
         name:'nobatcy'
+        
     },
     {
         name:'worker'
